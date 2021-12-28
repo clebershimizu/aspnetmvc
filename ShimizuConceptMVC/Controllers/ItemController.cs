@@ -18,5 +18,21 @@ namespace ShimizuConceptMVC.Controllers
             IEnumerable<Item> objectsList = _db.Items;
             return View(objectsList);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Item obj)
+        {
+            _db.Items.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
