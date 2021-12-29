@@ -15,7 +15,7 @@ namespace ShimizuConceptMVC.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Item> objectsList = _db.Items;
+            IEnumerable<ItemModel> objectsList = _db.Items;
             return View(objectsList);
         }
 
@@ -26,11 +26,62 @@ namespace ShimizuConceptMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Item obj)
+        public IActionResult Create(ItemModel obj)
         {
-            _db.Items.Add(obj);
+            if (ModelState.IsValid)
+            {
+                _db.Items.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(ItemModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Items.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);
+        }
+
+
+        public IActionResult UpdateView(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            var obj = _db.Items.Find(id);
+            if (obj == null) return NotFound();
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int? id)
+        {
+            var obj = _db.Items.Find(id);
+            if (obj == null) return NotFound();
+            
+            _db.Items.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        
+        public IActionResult DeleteView(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            var obj = _db.Items.Find(id);
+            if (obj == null) return NotFound();
+
+            return View(obj);
         }
 
 

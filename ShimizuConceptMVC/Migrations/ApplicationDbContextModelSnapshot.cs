@@ -21,7 +21,7 @@ namespace ShimizuConceptMVC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ShimizuConceptMVC.Models.Item", b =>
+            modelBuilder.Entity("ShimizuConceptMVC.Models.ItemModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShimizuConceptMVC.Models.Item>
+﻿@model IEnumerable<ShimizuConceptMVC.Models.ItemModel>
 
 <div class="container p-3">
     <div class="row pt-4">
@@ -25,15 +25,24 @@
                 <th>
                     Lender
                 </th>
+                <th>
+                    Edit
+                </th>
             </tr>
             </thead>
             <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td width="30%">@item.ItemName</td>
-                    <td width="30%">@item.Borrower</td>
-                    <td width="30%">@item.Lender</td>
+                    <td width="23%">@item.ItemName</td>
+                    <td width="23%">@item.Borrower</td>
+                    <td width="23%">@item.Lender</td>
+                    <td width="20%">
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="Item" asp-action="UpdateView" asp-route-Id="@item.Id" class="btn btn-primary mx-1">Update</a>
+                            <a asp-controller="Item" asp-action="DeleteView" asp-route-Id="@item.Id" class="btn btn-danger mx-1">Delete</a>
+                        </div>
+                    </td>
                 </tr>
             }
             </tbody>

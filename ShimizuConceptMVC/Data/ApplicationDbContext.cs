@@ -10,6 +10,6 @@ namespace ShimizuConceptMVC.Data
             
         }
 
-        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemModel> Items { get; set; }
     }
 }
